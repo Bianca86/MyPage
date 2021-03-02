@@ -31,6 +31,7 @@ export const Content = styled.div`
 `;
 
 export const Text = styled.div`
+  min-height: 10px;
   display: block;
   flex-direction: row;
   justify-content: flex-end;

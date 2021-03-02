@@ -1,10 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Cart, LogLinks, Nav, Logo, Input, Button } from "./LogIn.style";
+import { Cart, LogLinks, Nav, Logo, Input, Button, Error } from "./LogIn.style";
 import aqc1 from "../custom/img/aqc1.jpg";
 import aqc2 from "../custom/img/aqc2.jpg";
+import { useState } from "react";
 
-const LogIn = () => {
+const LogIn = ({ LogUser }) => {
+  const [values, setValues] = useState({
+    email: "random_mail@random.com",
+    pass: "parola",
+  });
+
+  function handleEmailChange(val) {
+    setValues({
+      ...values,
+      email: val,
+    });
+  }
+
+  function handlePasswordChange(val) {
+    setValues({
+      ...values,
+      pass: val,
+      error: "",
+    });
+  }
+
+  function handleSubmit() {
+    if (values.email === "random_mail@random.com" && values.pass === "parola") {
+      LogUser();
+    } else {
+      setValues({
+        ...values,
+        error: "Email sau parola incorecte.",
+      });
+    }
+  }
+
   return (
     <Nav>
       <LogLinks>
@@ -16,10 +48,23 @@ const LogIn = () => {
 
           <Cart>
             <h3>Logare creditor/ debitor</h3>
-            <Input type="E-mail" placeholder="E-mail" />
-            <Input type="Password" placeholder="Parola" />
+            {values.error !== "" && <Error>{values.error}</Error>}
+            <Input
+              type="email"
+              placeholder="Adresa de e-mail"
+              value={values.email}
+              onChange={(e) => handleEmailChange(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+            />
+            <Input
+              type="password"
+              placeholder="Parola"
+              value={values.pass}
+              onChange={(e) => handlePasswordChange(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+            />
 
-            <Button onClick>Acceseaza contul</Button>
+            <Button onClick={() => handleSubmit()}>Acceseaza contul</Button>
 
             <Link to="/" exact>
               <Button onClick>Înapoi la pagina principală</Button>

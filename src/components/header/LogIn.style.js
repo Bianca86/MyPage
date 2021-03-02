@@ -36,7 +36,6 @@ export const Cart = styled.div`
   margin: auto;
   box-sizing: border-box;
   max-width: 380px;
-  border: 2px dotted red;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -83,4 +82,9 @@ export const Button = styled.span`
   display: flex;
   justify-content: center;
   border-radius: 30px;
+`;
+
+export const Error = styled.p`
+  color: red;
+  margin: 1rem 0;
 `;
